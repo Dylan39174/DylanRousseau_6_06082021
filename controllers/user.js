@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
 const emailValidator = require('email-validator');
 const passwordValidator = require('password-validator');
+const User = require('../models/user');
 
 const passwordSchema = new passwordValidator;
 
@@ -15,6 +15,7 @@ passwordSchema
 .has().not().spaces()
 
 exports.signup = (req, res, next) => {
+  
   if(emailValidator.validate(req.body.email) == false){
     return res.status(401).json({Message: 'Adresse email invalide !'});
   }
@@ -43,7 +44,7 @@ exports.login = (req, res, next) => {
       bcrypt.compare(req.body.password, user.password)
         .then(valid => {
           if(!valid){
-            return res.status(401).json({Message: 'Mot de passe incorrect !'});
+            return res.status(401).json({Message: 'Identifiant incorrect !'});
           }
           return res.status(200).json({
             userId: user._id,

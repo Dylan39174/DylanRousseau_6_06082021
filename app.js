@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
 const path = require('path');
-
 require('dotenv').config();
 
 mongoose.connect(process.env.MONGODB_PATH,
